@@ -1,6 +1,7 @@
 name: Image Optimizer
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'images/**'  # Path to images
@@ -10,16 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - name: Install imagemin
-        run: npm install imagemin
+      - name: Print directory contents
+        run: ls -al
 
-        - name: Checkout repository
+      - name: npm install
+        run: npm install
+
+      - name: Install imagemin
+        run: npm install -g imagemin
+
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Install Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Install dependencies
         run: npm install

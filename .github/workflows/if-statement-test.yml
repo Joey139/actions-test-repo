@@ -1,0 +1,17 @@
+name: test-expression
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+        - run: echo 'Hello, world!'
+    statement-if:
+        runs-on: ubuntu-latest
+        if: github.event_name == 'push' && !startsWith(github.ref, 'refs/heads/test')
+        steps:
+        - run: echo 'Summer!'

@@ -1,0 +1,23 @@
+name: Print JSON Result
+
+on:
+  workflow_dispatch:
+
+jobs:
+  print-result:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Run JavaScript code
+        id: print
+        run: |
+          echo "result=$(node -e 'console.log(fromJSON(\"a\"))')" >> $GITHUB_ENV
+
+      - name: Print Result
+        run: |
+          echo "The result is ${{ steps.print.outputs.result }}"
